@@ -1,0 +1,7 @@
+# Run typography checker
+echo "Checking typography..."
+npm run check-typography
+
+# Run linter
+echo "Running linter..."
+npm run lint

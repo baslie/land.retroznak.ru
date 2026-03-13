@@ -1,0 +1,28 @@
+---
+import LandingLayout from "../layouts/LandingLayout.astro";
+import { HeroSection } from "@/components/landing/HeroSection";
+import ProductConstructorIsland from "@/components/landing/ProductConstructorIsland";
+import { BenefitsSection } from "@/components/landing/BenefitsSection";
+import { TimelineSection } from "@/components/landing/TimelineSection";
+import { SegmentsSection } from "@/components/landing/SegmentsSection";
+import { ProductionSection } from "@/components/landing/ProductionSection";
+import { PhotoGallerySection } from "@/components/landing/PhotoGallerySection";
+import { ReviewsSection } from "@/components/landing/ReviewsSection";
+import { FAQSection } from "@/components/landing/FAQSection";
+import { FinalCTASection } from "@/components/landing/FinalCTASection";
+---
+
+<LandingLayout>
+  <div class="flex flex-col gap-0">
+    <HeroSection client:load />
+    <ProductConstructorIsland client:visible />
+    <BenefitsSection client:visible />
+    <TimelineSection client:visible />
+    <SegmentsSection client:visible />
+    <ProductionSection client:visible />
+    <PhotoGallerySection client:visible />
+    <ReviewsSection client:visible />
+    <FAQSection client:visible />
+    <FinalCTASection client:visible />
+  </div>
+</LandingLayout>

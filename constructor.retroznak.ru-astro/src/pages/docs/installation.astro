@@ -1,0 +1,9 @@
+---
+import LandingLayout from "../../layouts/LandingLayout.astro";
+import InstallationPageContent from "@/components/pages/InstallationPageContent";
+import { typograf } from "@/lib/typograf";
+---
+
+<LandingLayout title={typograf("Установка ретрознаков")} description={typograf("Инструкция по установке ретрознаков")}>
+  <InstallationPageContent client:load />
+</LandingLayout>

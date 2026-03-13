@@ -1,0 +1,9 @@
+---
+import LandingLayout from "../../layouts/LandingLayout.astro";
+import CarePageContent from "@/components/pages/CarePageContent";
+import { typograf } from "@/lib/typograf";
+---
+
+<LandingLayout title={typograf("Уход за ретрознаками")} description={typograf("Рекомендации по уходу за ретрознаками")}>
+  <CarePageContent client:load />
+</LandingLayout>

@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { typograf } from "@/lib/typograf";
+import PrivacyPageContent from "@/components/pages/PrivacyPageContent";
+---
+
+<BaseLayout title={typograf("Политика конфиденциальности")} description={typograf("Политика в отношении обработки персональных данных ООО «Три Кита»")} noindex={true}>
+  <PrivacyPageContent client:load />
+</BaseLayout>

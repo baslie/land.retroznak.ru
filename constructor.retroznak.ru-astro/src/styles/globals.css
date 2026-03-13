@@ -1,0 +1,228 @@
+:root {
+  --font-manrope: "Manrope", "Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", sans-serif;
+  --font-noto-serif: "Noto Serif", "Georgia", "Times New Roman", serif;
+
+  /* HEX colors for SVG inline usage */
+  --brand-orange-500-hex: %23f97316;
+  --white-hex: %23ffffff;
+}
+
+/* =================================================================
+   Lenis Smooth Scroll Styles
+   ================================================================= */
+
+/* HTML & Body setup for Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Prevent smooth scroll on specific elements */
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Lenis stopped state - prevent scrolling completely */
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Disable pointer events for iframes while scrolling to prevent scroll interference */
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Prevent wheel/touch events on specific elements */
+[data-lenis-prevent-wheel] {
+  overscroll-behavior: none;
+}
+
+[data-lenis-prevent-touch] {
+  overscroll-behavior: none;
+}
+
+/* Body optimization for transforms */
+body {
+  font-family: var(--font-manrope);
+  transform-origin: top left;
+}
+
+/* Prevent smooth scroll in modals, popups, and dialogs */
+.modal,
+.popup,
+.drawer,
+.dialog,
+[role="dialog"],
+[role="alertdialog"] {
+  overscroll-behavior: contain;
+}
+
+/* =================================================================
+   End Lenis Smooth Scroll Styles
+   ================================================================= */
+
+/* Swiper image fix - remove padding/margins from images only */
+.swiper-slide img {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* Swiper pagination - brand orange color */
+.swiper-pagination-bullet {
+  background: rgb(255 255 255) !important;
+  opacity: 1 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: rgb(var(--brand-orange-500)) !important;
+  opacity: 1 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Swiper navigation - proper arrows with SVG */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 32px !important;
+  height: 32px !important;
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  transition: all 0.3s ease !important;
+  opacity: 1 !important;
+}
+
+.swiper-button-prev {
+  left: 16px !important;
+}
+
+.swiper-button-next {
+  right: 16px !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgb(249, 115, 22) !important;
+  box-shadow: 0 2px 6px rgba(249, 115, 22, 0.25) !important;
+  opacity: 1 !important;
+  transform: scale(1.08) !important;
+}
+
+/* Hide default arrow text and SVG icons completely */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none !important;
+  content: '' !important;
+  font-size: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Hide Swiper's default SVG navigation icons */
+.swiper-navigation-icon {
+  display: none !important;
+}
+
+.swiper-button-next svg,
+.swiper-button-prev svg {
+  display: none !important;
+}
+
+/* Custom arrow - chevron right (оранжевая стрелка) */
+.swiper-button-next {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ea580c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 16px 16px !important;
+}
+
+/* Custom arrow - chevron left (оранжевая стрелка) */
+.swiper-button-prev {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ea580c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 16px 16px !important;
+}
+
+/* Hover state - белые стрелки на оранжевом фоне */
+.swiper-button-next:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+.swiper-button-prev:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+/* Disabled state */
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.swiper-button-next.swiper-button-disabled:hover,
+.swiper-button-prev.swiper-button-disabled:hover {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  transform: none !important;
+}
+
+/* Keep orange arrows even when disabled */
+.swiper-button-next.swiper-button-disabled:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ea580c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+.swiper-button-prev.swiper-button-disabled:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ea580c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+/* Dark theme - светлые стрелки на темном фоне */
+.dark .swiper-button-next,
+.dark .swiper-button-prev {
+  background-color: rgba(23, 23, 23, 0.85) !important;
+  border: none !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark .swiper-button-next {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-size: 16px 16px !important;
+}
+
+.dark .swiper-button-prev {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-size: 16px 16px !important;
+}
+
+.dark .swiper-button-next:hover,
+.dark .swiper-button-prev:hover {
+  background-color: rgb(249, 115, 22) !important;
+  box-shadow: 0 2px 6px rgba(249, 115, 22, 0.3) !important;
+}
+
+.dark .swiper-button-next.swiper-button-disabled:hover,
+.dark .swiper-button-prev.swiper-button-disabled:hover {
+  background-color: rgba(23, 23, 23, 0.85) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark .swiper-button-next.swiper-button-disabled:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+.dark .swiper-button-prev.swiper-button-disabled:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+/* Lightbox backdrop - 75% opacity */
+.yarl__container {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}

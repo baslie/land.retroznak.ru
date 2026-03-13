@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { typograf } from "@/lib/typograf";
+import ConsentPageContent from "@/components/pages/ConsentPageContent";
+---
+
+<BaseLayout title={typograf("Согласие на обработку персональных данных")} description={typograf("Согласие на обработку персональных данных пользователя сайта ООО «Три Кита»")} noindex={true}>
+  <ConsentPageContent client:load />
+</BaseLayout>

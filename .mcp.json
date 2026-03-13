@@ -1,0 +1,50 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "@upstash/context7-mcp"
+      ],
+      "env": {
+        "CONTEXT7_API_KEY": "***REMOVED***"
+      }
+    },
+    "vibe-annotations": {
+      "type": "http",
+      "url": "http://127.0.0.1:3846/mcp"
+    },
+    "shadcn": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "@jpisnice/shadcn-ui-mcp-server",
+        "--github-api-key",
+        "***REMOVED***"
+      ]
+    },
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "chrome-devtools-mcp@latest"
+      ]
+    },
+    "typograf Docs": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "mcp-remote",
+        "https://gitmcp.io/typograf/typograf"
+      ]
+    }
+  }
+}

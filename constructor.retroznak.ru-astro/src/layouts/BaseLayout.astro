@@ -1,0 +1,223 @@
+---
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/noto-serif";
+import "@/styles/tailwind.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "@/styles/globals.css";
+import "lenis/dist/lenis.css";
+
+import { asset } from "@/lib/base-path";
+import { siteMetadata } from "@/config/site";
+import { InfoBanner } from "@/components/InfoBanner";
+import { NoiseOverlay } from "@/components/NoiseOverlay";
+import ReferralTracker from "@/components/ReferralTracker";
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = siteMetadata.title,
+  description = siteMetadata.description,
+  noindex = false,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, siteMetadata.siteUrl).toString();
+const socialImageUrl = `${siteMetadata.siteUrl}${siteMetadata.socialImage}`;
+
+const organizationSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ООО «Три Кита»",
+  legalName: "Общество с ограниченной ответственностью «Три Кита»",
+  url: siteMetadata.siteUrl,
+  logo: `${siteMetadata.siteUrl}/icons/apple-touch-icon.png`,
+  description: siteMetadata.description,
+  email: siteMetadata.contactEmail,
+  telephone: ["+7 (983) 232-22-06", "+7 (968) 188-47-15", "+7 (913) 816-47-15"],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "ул. Енисейская, д. 32б",
+    addressLocality: "Томск",
+    postalCode: "634041",
+    addressCountry: "RU",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+7 (983) 232-22-06",
+      contactType: "customer service",
+      areaServed: "RU",
+      availableLanguage: "Russian",
+    },
+  ],
+  sameAs: [siteMetadata.maxUrl, siteMetadata.telegramUrl],
+});
+---
+
+<html lang="ru" class="bg-background text-foreground">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Astro" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="application-name" content={siteMetadata.brand} />
+    <meta name="keywords" content={siteMetadata.keywords.join(", ")} />
+    <meta name="author" content={siteMetadata.organization} />
+    <meta name="creator" content={siteMetadata.organization} />
+    <meta name="publisher" content={siteMetadata.organization} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    )}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={siteMetadata.locale} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={siteMetadata.brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="1067" />
+    <meta property="og:image:alt" content={siteMetadata.socialImageAlt} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#f3efe2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1014" media="(prefers-color-scheme: dark)" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href={asset("/icons/favicon.svg")} />
+    <link rel="icon" type="image/png" sizes="32x32" href={asset("/icons/favicon-32x32.png")} />
+    <link rel="icon" type="image/png" sizes="16x16" href={asset("/icons/favicon-16x16.png")} />
+    <link rel="apple-touch-icon" sizes="180x180" href={asset("/icons/apple-touch-icon.png")} />
+    <link rel="mask-icon" href={asset("/icons/safari-pinned-tab.svg")} color="#000000" />
+    <link rel="manifest" href={asset("/site.webmanifest")} />
+
+    <!-- Theme init (prevent flash) -->
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem("theme");
+        if (stored === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={organizationSchema} />
+
+    <!-- Jivo Chat Widget -->
+    <!-- <script src="//code.jivo.ru/widget/nZ7sd3tz9u" async></script> -->
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <slot />
+
+    <InfoBanner client:idle />
+    <NoiseOverlay />
+    <ReferralTracker client:idle />
+
+    <!-- Lenis Smooth Scroll -->
+    <script>
+      import Lenis from "lenis";
+
+      const lenis = new Lenis({
+        duration: 1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.5,
+        infinite: false,
+        autoResize: true,
+        prevent: (node) => {
+          if (node.hasAttribute("data-lenis-prevent")) return true;
+          const preventClasses = ["modal", "popup", "drawer", "dialog", "dropdown-menu"];
+          return preventClasses.some(
+            (className) => node.classList.contains(className) || node.closest(`.${className}`)
+          );
+        },
+      });
+
+      // Auto-stop scroll when modals open
+      const bodyObserver = new MutationObserver(() => {
+        const isHidden = document.body.style.overflow === "hidden";
+        if (isHidden) lenis.stop();
+        else lenis.start();
+      });
+      bodyObserver.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+
+      // RAF loop
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Export for components that need it
+      (window as any).__lenis = lenis;
+    </script>
+
+    <!-- Yandex.Metrika (отключено для демо) -->
+    <!--
+    <script is:inline>
+      (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=66944668', 'ym');
+      ym(66944668, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/66944668" style="position:absolute;left:-9999px" alt="" /></div>
+    </noscript>
+    -->
+
+    <!-- Top.Mail.Ru / VK Pixel (отключено для демо) -->
+    <!--
+    <script is:inline>
+      var _tmr = window._tmr || (window._tmr = []);
+      _tmr.push({id: "3729731", type: "pageView", start: (new Date()).getTime()});
+      (function (d, w, id) {
+        if (d.getElementById(id)) return;
+        var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+        ts.src = "https://top-fwz1.mail.ru/js/code.js";
+        var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+        if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+      })(document, window, "tmr-code");
+    </script>
+    <noscript>
+      <div><img src="https://top-fwz1.mail.ru/counter?id=3729731;js=na" style="position:absolute;left:-9999px" alt="" /></div>
+    </noscript>
+    -->
+  </body>
+</html>
