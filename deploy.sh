@@ -11,19 +11,20 @@
 # ============================================================================
 
 # Путь к Node.js на сервере Beget
-NODE_PATH="/home/e/***REMOVED***/.local/bin/node"
+NODE_PATH="/home/e/${BEGET_LOGIN:?Задайте BEGET_LOGIN}/.local/bin/node"
 
 # Git репозиторий (содержит оба проекта)
 GIT_REPO="git@github.com:baslie/land.retroznak.ru.git"
 GIT_BRANCH="main"
 
 # SMTP настройки для отправки email (общие для обоих проектов)
-SMTP_HOST="smtp.beget.com"
-SMTP_PORT="465"
-SMTP_USER="info@retroznak.ru"
-SMTP_PASSWORD='***REMOVED***'
-MAIL_FROM="info@retroznak.ru"
-MAIL_TO="***REMOVED***,***REMOVED***"
+# Значения берутся из переменных окружения; без них скрипт завершится с ошибкой
+SMTP_HOST="${SMTP_HOST:-smtp.beget.com}"
+SMTP_PORT="${SMTP_PORT:-465}"
+SMTP_USER="${SMTP_USER:?Задайте SMTP_USER}"
+SMTP_PASSWORD="${SMTP_PASSWORD:?Задайте SMTP_PASSWORD}"
+MAIL_FROM="${MAIL_FROM:?Задайте MAIL_FROM}"
+MAIL_TO="${MAIL_TO:?Задайте MAIL_TO}"
 
 # ============================================================================
 # НАСТРОЙКИ ПРОЕКТОВ

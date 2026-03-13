@@ -21,7 +21,7 @@
 
 ```bash
 # 1. Подключиться к серверу
-ssh ***REMOVED***@tilda.beget.tech
+ssh <YOUR_BEGET_LOGIN>@<YOUR_BEGET_SERVER>
 
 # 2. Войти в Docker-оболочку
 ssh localhost -p 222
@@ -42,7 +42,7 @@ cd ~/land.retroznak.ru
 ### Шаг 1: SSH подключение
 
 ```bash
-ssh ***REMOVED***@tilda.beget.tech
+ssh <YOUR_BEGET_LOGIN>@<YOUR_BEGET_SERVER>
 ```
 
 ### Шаг 2: Вход в Docker-оболочку
@@ -53,7 +53,7 @@ ssh localhost -p 222
 
 После входа строка приглашения изменится на:
 ```
-(docker) ***REMOVED***@tilda:~ [0] $
+(docker) <YOUR_BEGET_LOGIN>@<server>:~ [0] $
 ```
 
 > Все команды выполняются **внутри Docker**.
@@ -97,19 +97,19 @@ cd ~/land.retroznak.ru
 
 ```bash
 # Путь к Node.js
-NODE_PATH="/home/e/***REMOVED***/.local/bin/node"
+NODE_PATH="/home/e/<YOUR_BEGET_LOGIN>/.local/bin/node"
 
 # Git репозиторий
 GIT_REPO="git@github.com:baslie/land.retroznak.ru.git"
 GIT_BRANCH="main"
 
-# SMTP настройки
+# SMTP настройки (задаются через переменные окружения)
 SMTP_HOST="smtp.beget.com"
 SMTP_PORT="465"
-SMTP_USER="info@retroznak.ru"
-SMTP_PASSWORD='***REMOVED***'
-MAIL_FROM="info@retroznak.ru"
-MAIL_TO="***REMOVED***,***REMOVED***"
+SMTP_USER=<YOUR_SMTP_USER>
+SMTP_PASSWORD=<YOUR_SMTP_PASSWORD>
+MAIL_FROM=<YOUR_MAIL_FROM>
+MAIL_TO=<YOUR_EMAILS>
 
 # Директория развертывания (одна для обоих проектов)
 DEPLOY_ROOT="$HOME/land.retroznak.ru"
@@ -140,7 +140,7 @@ cp -r temp_clone/land.retroznak.ru/. app/
 rm -rf temp_clone
 
 # 3) Проверка Node.js
-/home/e/***REMOVED***/.local/bin/node -v && npm -v
+/home/e/<YOUR_BEGET_LOGIN>/.local/bin/node -v && npm -v
 
 # 4) Установка прав
 chmod 755 ~/.local ~/.local/bin ~/.local/bin/node
@@ -151,10 +151,10 @@ find ~/land.retroznak.ru/app -type f -exec chmod 644 {} \;
 cat > ~/land.retroznak.ru/app/.env.local << 'EOF'
 SMTP_HOST=smtp.beget.com
 SMTP_PORT=465
-SMTP_USER=info@retroznak.ru
-SMTP_PASSWORD=***REMOVED***
-MAIL_FROM=info@retroznak.ru
-MAIL_TO=***REMOVED***,***REMOVED***
+SMTP_USER=<YOUR_SMTP_USER>
+SMTP_PASSWORD=<YOUR_SMTP_PASSWORD>
+MAIL_FROM=<YOUR_MAIL_FROM>
+MAIL_TO=<YOUR_EMAILS>
 EOF
 chmod 600 ~/land.retroznak.ru/app/.env.local
 
@@ -175,8 +175,8 @@ RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-PassengerNodejs /home/e/***REMOVED***/.local/bin/node
-PassengerAppRoot /home/e/***REMOVED***/land.retroznak.ru/app
+PassengerNodejs /home/e/<YOUR_BEGET_LOGIN>/.local/bin/node
+PassengerAppRoot /home/e/<YOUR_BEGET_LOGIN>/land.retroznak.ru/app
 PassengerAppType node
 PassengerStartupFile server.js
 EOF
@@ -288,7 +288,7 @@ rm -rf app
 ls -la ~/land.retroznak.ru/
 
 # Проверка версии Node.js
-/home/e/***REMOVED***/.local/bin/node -v
+/home/e/<YOUR_BEGET_LOGIN>/.local/bin/node -v
 
 # Размер проекта
 du -sh ~/land.retroznak.ru/app
